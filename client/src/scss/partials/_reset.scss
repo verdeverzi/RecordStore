@@ -1,0 +1,36 @@
+@use './variables' as *;
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;700&display=swap');
+
+* {
+  font-family: 'Montserrat', sans-serif;
+  color: black;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.main {
+  width: 100%;
+  height: 100%;
+}
+
+.main > div {
+  margin-top: 80px;
+  height: calc(100vh - 80px);
+}
+
+// ::placeholder {
+//   /* Chrome, Firefox, Opera, Safari 10.1+ */
+//   color: $color2;
+//   opacity: 1; /* Firefox */
+// }
+
+// :-ms-input-placeholder {
+//   /* Internet Explorer 10-11 */
+//   color: $color2;
+// }
+
+// ::-ms-input-placeholder {
+//   /* Microsoft Edge */
+//   color: $color2;
+// }

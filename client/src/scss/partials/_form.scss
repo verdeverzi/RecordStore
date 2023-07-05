@@ -1,0 +1,60 @@
+@use './variables' as *;
+
+form {
+  width: 400px;
+  margin-top: 70px;
+  .info {
+    display: flex;
+    flex-direction: column;
+    margin: 20px 0;
+    width: 100%;
+    .row {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      :first-child {
+        margin-right: 10px;
+      }
+    }
+    label {
+      margin-bottom: 20px;
+      font-size: 12px;
+    }
+    .error-message {
+      margin-bottom: 30px;
+      font-size: x-small;
+      color: $notHorribleRed;
+      margin-top: 4px;
+      text-align: right;
+      min-height: 15px;
+    }
+    input {
+      background: none;
+      border: 0;
+      border-bottom: 2px solid rgb(0, 0, 0);
+      width: 100%;
+      padding: 5px;
+      font-size: small;
+      font-weight: 700;
+    }
+  }
+}
+
+.submit {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  input {
+    background-color: $color1;
+    box-shadow: none;
+    border: 0;
+    color: rgb(0, 0, 0);
+    cursor: pointer;
+    padding: 10px 15px;
+    font-weight: 700;
+    border-radius: 50px;
+    &:hover {
+      opacity: 0.9;
+    }
+  }
+}

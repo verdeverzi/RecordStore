@@ -1,0 +1,107 @@
+@use './variables' as *;
+
+nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: $color1;
+  // color: white;
+  z-index: 2;
+  ul {
+    display: flex;
+    list-style: none;
+    height: 80px;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    .logo {
+      padding-left: 20px;
+      font-size: 1.2em;
+      a {
+        text-decoration: none;
+        // color: white;
+        span {
+          padding-left: 10px;
+          font-weight: 700;
+          letter-spacing: 3px;
+        }
+      }
+    }
+    .items {
+      display: flex;
+      padding-right: 20px;
+      align-items: center;
+      a {
+        text-decoration: none;
+        // color: white;
+        margin: 0 10px;
+        p {
+          font-size: small;
+          font-weight: 700;
+        }
+        .cnt {
+          position: absolute;
+          p {
+            color: white;
+            position: absolute;
+            z-index: 2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 10px;
+            &:before {
+              content: '';
+              position: absolute;
+              width: 20px;
+              height: 20px;
+              z-index: -1;
+              border-radius: 50%;
+
+              background-color: $color3;
+            }
+          }
+        }
+      }
+      .button-bg {
+        background: white;
+        padding: 10px 15px;
+        border-radius: 50px;
+      }
+
+      svg {
+        font-size: 25px;
+      }
+      .selected p {
+        text-decoration: underline;
+      }
+      .avatar {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        height: 40px;
+        width: 40px;
+        img {
+          width: 100%;
+          border-radius: 50%;
+          margin-right: 5px;
+          border: 2px solid $color3;
+          padding: 2px;
+        }
+
+        .signUp {
+          background: $color2;
+          padding: 10px 20px;
+          border-radius: 20px;
+        }
+      }
+    }
+  }
+}
+
+.nav-avatar {
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  border: 1px solid black;
+  padding: 5px;
+}
