@@ -20,12 +20,13 @@ const {
 const app = express();
 
 //! MIDDLEWARE
-app.use(
-  cors({
-    origin: 'http://localhost:3000',
-    credentials: true,
-  })
-);
+const corsOptions = {
+  origin: ['http://localhost:3000', 'https://record-store-d4co.onrender.com'],
+  credentials: true,
+  optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+};
+
+app.use(cors(corsOptions));
 app.use(morgan('dev'));
 app.use(express.json({ limit: '1MB' }));
 app.use(cookieParser());
