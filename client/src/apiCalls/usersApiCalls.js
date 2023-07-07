@@ -1,6 +1,9 @@
 import axios from 'axios';
 
-axios.defaults.baseURL = 'http://localhost:8000';
+axios.defaults.baseURL = [
+  'http://localhost:8000',
+  'https://recordstore-backend.onrender.com',
+];
 axios.defaults.withCredentials = true; // allow us to include cookies
 
 export const signup = async (dispatch, data) => {
