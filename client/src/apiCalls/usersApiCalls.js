@@ -31,7 +31,7 @@ export const login = async (dispatch, data) => {
       email,
       password,
     });
-
+    console.log(response);
     dispatch({ type: 'LOGIN', payload: response.data.data });
     return response.data;
   } catch (error) {
