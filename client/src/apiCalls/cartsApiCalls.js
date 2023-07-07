@@ -1,4 +1,5 @@
 import axios from 'axios';
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:8000';
 
 //! Add an item to the cart
 export const addToCart = async (cartsDispatch, cartsState, recordId) => {
@@ -8,7 +9,7 @@ export const addToCart = async (cartsDispatch, cartsState, recordId) => {
       (item) => item.record._id === recordId
     );
     if (itemToUpdate) {
-      const response = await axios.patch('http://localhost:8000/carts', {
+      const response = await axios.patch(`${API_URL}/carts`, {
         quantity: itemToUpdate.quantity + 1,
         cartId: cartsState.id,
         recordId,
@@ -19,7 +20,7 @@ export const addToCart = async (cartsDispatch, cartsState, recordId) => {
       return;
     }
 
-    const response = await axios.post('http://localhost:8000/carts', {
+    const response = await axios.post(`${API_URL}/carts`, {
       record: recordId,
       quantity: 1,
       cartId: cartsState.id,
@@ -38,7 +39,7 @@ export const addToCart = async (cartsDispatch, cartsState, recordId) => {
 //! Get all items from the cart
 export const getCartItems = async (cartsDispatch) => {
   try {
-    const response = await axios.get('http://localhost:8000/carts/me');
+    const response = await axios.get(`${API_URL}/carts/me`);
 
     if (response.data.data) {
       cartsDispatch({ type: 'GET_CART_DATA', payload: response.data.data });
@@ -55,12 +56,9 @@ export const getCartItems = async (cartsDispatch) => {
 export const deleteCartItem = async (cartsDispatch, cartsState, recordId) => {
   console.log(recordId);
   try {
-    const response = await axios.patch(
-      `http://localhost:8000/carts/${cartsState.id}`,
-      {
-        recordId,
-      }
-    );
+    const response = await axios.patch(`${API_URL}/carts/${cartsState.id}`, {
+      recordId,
+    });
 
     console.log('delet cart itesms res ->', response.data.data);
 
@@ -73,7 +71,7 @@ export const deleteCartItem = async (cartsDispatch, cartsState, recordId) => {
 
 export const createCart = async (cartsDispatch) => {
   try {
-    const response = await axios.post('http://localhost:8000/carts/me');
+    const response = await axios.post(`${API_URL}/carts/me`);
 
     cartsDispatch({ type: 'ADD_CART', payload: response.data.data });
   } catch (error) {
