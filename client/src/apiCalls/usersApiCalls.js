@@ -42,8 +42,7 @@ export const login = async (dispatch, data) => {
     console.log(response);
     dispatch({ type: 'LOGIN', payload: response.data.data });
 
-    // Store the JWT in the local storage
-    console.log(response.data)
+    console.log(response.data);
     localStorage.setItem('jwt', response.data.data.token);
 
     return response.data;
