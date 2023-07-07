@@ -3,8 +3,17 @@ import axios from 'axios';
 axios.defaults.baseURL = process.env.REACT_APP_API_URL;
 
 axios.defaults.withCredentials = true; // allow us to include cookies
+const setAuthToken = () => {
+  const token = localStorage.getItem('jwt');
+  if (token) {
+    axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+  } else {
+    delete axios.defaults.headers.common.Authorization;
+  }
+};
 
 export const signup = async (dispatch, data) => {
+  setAuthToken();
   const { firstName, lastName, email, password } = data;
   try {
     const response = await axios.post('/auth/signup', {
@@ -23,6 +32,7 @@ export const signup = async (dispatch, data) => {
 };
 
 export const login = async (dispatch, data) => {
+  setAuthToken();
   const { email, password } = data;
   try {
     const response = await axios.post('/auth/login', {
@@ -31,18 +41,18 @@ export const login = async (dispatch, data) => {
     });
     console.log(response);
     dispatch({ type: 'LOGIN', payload: response.data.data });
+
+    // Store the JWT in the local storage
+    localStorage.setItem('jwt', response.data.data.token);
+
     return response.data;
   } catch (error) {
-    if (error.response && error.response.data) {
-      dispatch({ type: 'LOGIN_FAILED', payload: error.response.data.message });
-      return error.response.data;
-    }
-    console.log(error);
-    return { message: 'An error occurred' };
+    // handle error
   }
 };
 
 export const getUser = async (dispatch) => {
+  setAuthToken();
   try {
     const response = await axios.get('/me');
 
@@ -56,6 +66,7 @@ export const getUser = async (dispatch) => {
 };
 
 export const logout = async (usersDispatch, cartsDispatch) => {
+  setAuthToken();
   try {
     await axios.get('/auth/logout');
     usersDispatch({ type: 'LOGOUT' });
@@ -66,6 +77,7 @@ export const logout = async (usersDispatch, cartsDispatch) => {
 };
 
 export const updateUser = async (dispatch, data) => {
+  setAuthToken();
   try {
     const response = await axios.patch('/me', data);
     dispatch({ type: 'UPDATE_USER', payload: response.data.data });

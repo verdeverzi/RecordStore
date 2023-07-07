@@ -3,7 +3,18 @@ import axios from 'axios';
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:8000';
 
 //! Add an item to the cart
+
+const setAuthToken = () => {
+  const token = localStorage.getItem('jwt');
+  if (token) {
+    axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+  } else {
+    delete axios.defaults.headers.common.Authorization;
+  }
+};
+
 export const addToCart = async (cartsDispatch, cartsState, recordId) => {
+  setAuthToken();
   console.log(' .cartsState.id. ', cartsState.id);
   try {
     const itemToUpdate = cartsState.items.find(
@@ -39,6 +50,7 @@ export const addToCart = async (cartsDispatch, cartsState, recordId) => {
 
 //! Get all items from the cart
 export const getCartItems = async (cartsDispatch) => {
+  setAuthToken();
   try {
     const response = await axios.get(`${API_URL}/carts/me`);
 
@@ -55,6 +67,7 @@ export const getCartItems = async (cartsDispatch) => {
 };
 
 export const deleteCartItem = async (cartsDispatch, cartsState, recordId) => {
+  setAuthToken();
   console.log(recordId);
   try {
     const response = await axios.patch(`${API_URL}/carts/${cartsState.id}`, {
@@ -71,6 +84,7 @@ export const deleteCartItem = async (cartsDispatch, cartsState, recordId) => {
 };
 
 export const createCart = async (cartsDispatch) => {
+  setAuthToken();
   try {
     const response = await axios.post(`${API_URL}/carts/me`);
 
