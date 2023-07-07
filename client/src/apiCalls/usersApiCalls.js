@@ -1,9 +1,7 @@
 import axios from 'axios';
 
-axios.defaults.baseURL = [
-  'http://localhost:8000',
-  'https://recordstore-backend.onrender.com',
-];
+axios.defaults.baseURL = process.env.REACT_APP_API_URL;
+
 axios.defaults.withCredentials = true; // allow us to include cookies
 
 export const signup = async (dispatch, data) => {
@@ -35,10 +33,15 @@ export const login = async (dispatch, data) => {
     dispatch({ type: 'LOGIN', payload: response.data.data });
     return response.data;
   } catch (error) {
-    dispatch({ type: 'LOGIN_FAILED', payload: error.response.data.message });
-    return error.response.data;
+    if (error.response && error.response.data) {
+      dispatch({ type: 'LOGIN_FAILED', payload: error.response.data.message });
+      return error.response.data;
+    } else {
+      console.log(error);
+      return { message: 'An error occurred' };
+    }
   }
-};
+  
 
 export const getUser = async (dispatch) => {
   try {
