@@ -36,6 +36,7 @@ const Login = () => {
     try {
       const res = await login(usersDispatch, data);
       if (res.statusCode < 400) {
+        localStorage.setItem('jwt', res.data.token);
         await getCartItems(cartsDispatch);
         setLoading(false);
         return navigate('/dashboard');
