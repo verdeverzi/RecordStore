@@ -36,12 +36,11 @@ export const login = async (dispatch, data) => {
     if (error.response && error.response.data) {
       dispatch({ type: 'LOGIN_FAILED', payload: error.response.data.message });
       return error.response.data;
-    } else {
-      console.log(error);
-      return { message: 'An error occurred' };
     }
+    console.log(error);
+    return { message: 'An error occurred' };
   }
-  
+};
 
 export const getUser = async (dispatch) => {
   try {
