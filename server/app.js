@@ -28,7 +28,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: 'https://record-store-d4co.onrender.com',
+    origin:[ 'http://localhost:3000','https://record-store-d4co.onrender.com',]
     credentials: true,
   })
 );
