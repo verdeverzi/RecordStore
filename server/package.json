@@ -5,7 +5,8 @@
   "scripts": {
     "start:dev": "nodemon server.js NODE_ENV=development",
     "start:prod": "nodemon server.js NODE_ENV=production",
-    "seed": "node seed/seed_db.js"
+    "seed": "node seed/seed_db.js",
+    "start":"node server.js"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
